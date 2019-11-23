@@ -17,3 +17,11 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+
+Route.group(() => {
+
+    Route.post('login', 'UserController.login')
+    Route.post('register', 'UserController.register')
+    Route.get('getUser/:id', 'UserController.show')
+
+}).prefix('users')
