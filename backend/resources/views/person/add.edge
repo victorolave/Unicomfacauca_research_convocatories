@@ -1,0 +1,62 @@
+@layout('main')
+@section('content')
+		<form action="/Entities" method="POST">
+			{{ csrfField() }}	
+
+			<div class="form-group">
+				<label for="">Primer Nombre</label>
+				<input type="text" name="first_name" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Segundo Nombre</label>
+				<input type="text" name="second_name" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Primer Apellido</label>
+				<input type="text" name="last_name" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Segundo Apellido</label>
+				<input type="text" name="second_last_name" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Edad</label>
+				<input type="integer" name="age" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Tipo de Identificacion</label>
+				<input type="integer" name="identification_type_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Numero de Identificacion</label>
+				<input type="text" name="idetification" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Fecha de Cumpleaños</label>
+				<input type="text" name="birthday" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Direccion</label>
+				<input type="text" name="address" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Email</label>
+				<input type="text" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Numero de Telefono</label>
+				<input type="text" name="phone_number" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Id Entidad</label>
+				<input type="integer" name="entity_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Ocupacion</label>
+				<input type="text" name="ocupation" class="form-control">
+			</div>
+			<button type="submit" class="btn btn-dark primary">
+				Guardar
+			</button>
+		</form>
+	@endsection

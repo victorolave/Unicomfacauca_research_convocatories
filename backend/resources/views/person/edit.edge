@@ -1,0 +1,64 @@
+@layout('main')
+
+    @section('content')
+    <h1>Editar Persona </h1>
+		<form action="{{ '/Persons/'+ Person.id + '?_method=PUT' }} " method="POST">
+			{{ csrfField() }}	
+			
+            <div class="form-group">
+				<label for="">Primer Nombre</label>
+				<input type="text" name="first_name" class="form-control" value="{{ Person.first_name }}">
+			</div>
+            <div class="form-group">
+				<label for="">Segundo Nombre</label>
+				<input type="text" name="second_name" class="form-control" value="{{ Person.second_name }}">
+			</div>
+            <div class="form-group">
+				<label for="">Primer Apellido</label>
+				<input type="text" name="last_name" class="form-control" value="{{ Person.last_name }}">
+            </div>
+            <div class="form-group">
+				<label for="">Segundo Apellido</label>
+				<input type="text" name="second_last_name" class="form-control" value="{{ Person.second_last_name }}">
+            </div>
+            <div class="form-group">
+				<label for="">Edad</label>
+				<input type="integer" name="age" class="form-control" value="{{ Person.age }}">
+            </div>
+            <div class="form-group">
+				<label for="">Tipo de Identificacion</label>
+				<input type="integer" name="identification_type_id" class="form-control" value="{{ Person.identification_type_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Numero de Identificacion</label>
+				<input type="text" name="idetification" class="form-control" value="{{ Person.idetification }}">
+            </div>
+            <div class="form-group">
+				<label for="">Fecha de Cumpleaños</label>
+				<input type="text" name="birthday" class="form-control" value="{{ Person.birthday }}">
+            </div>
+            <div class="form-group">
+				<label for="">Direccion</label>
+				<input type="text" name="address" class="form-control" value="{{ Person.address }}">
+            </div>
+            <div class="form-group">
+				<label for="">Email</label>
+				<input type="text" name="email" class="form-control" value="{{ Person.email }}">
+            </div>
+            <div class="form-group">
+				<label for="">Numero de Telefono</label>
+				<input type="text" name="phone_number" class="form-control" value="{{ Person.phone_number }}">
+            </div>
+            <div class="form-group">
+				<label for="">Id Entidad</label>
+				<input type="integer" name="entity_id" class="form-control" value="{{ Person.entity_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Ocupacion</label>
+				<input type="text" name="ocupation" class="form-control" value="{{ Person.ocupation }}">
+			</div>
+			<button type="submit" class="btn btn-primary">
+				Actualizar
+			</button>
+		</form>
+	@endsection

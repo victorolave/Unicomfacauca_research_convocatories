@@ -1,12 +1,12 @@
 'use strict'
 
-const Entity = use('App/Models/Entity')
+const Entityy = use('App/Models/Entity')
 
 class EntityController {
 
     async index({ view }) {
 
-		const Entity = await Entity.all()
+		const Entity = await Entityy.all()
 
 		return view.render('Entity.index', {
 			Entitys: Entity.toJSON()
@@ -18,7 +18,7 @@ class EntityController {
 	}
 
 	async store({ request, response, view }) {
-		const Entity = new Entity()
+		const Entity = new Entityy()
 		Entity.name = request.input('name')
         Entity.nit = request.input('nit')
         Entity.legal_representative_id = request.input('legal_representative_id')
@@ -36,20 +36,20 @@ class EntityController {
 	}
     async details({ params, view }) {
 		console.log(params)
-		const Entity = await Entity.find(params.id)
+		const Entity = await Entityy.find(params.id)
 		return view.render('Entity.details', {
 			Entity
 		})
 	}
 	async edit({ params, view }) {
-		const Entity = await Entity.find(params.id)
+		const Entity = await Entityy.find(params.id)
 		return view.render('Entity.edit', {
 			Entity
 		})
 	}
 
 	async update ({params, request, response}){
-		const Entity = await Entity.find(params.id)
+		const Entity = await Entityy.find(params.id)
 		Entity.name = request.input('name')
         Entity.nit = request.input('nit')
         Entity.legal_representative_id = request.input('legal_representative_id')
@@ -69,7 +69,7 @@ class EntityController {
 
 	}
 	async destroy({ params, response }) {
-		const Entity = await Entity.find(params.id)
+		const Entity = await Entityy.find(params.id)
 		await Entity.delete()
 
 		return response.redirect('/Entities')

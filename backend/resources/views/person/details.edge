@@ -1,0 +1,26 @@
+@layout('main')
+	@section('content')
+		<h1>{{ Person.first_name }}</h1>	
+		<p>{{ Person.second_name }}</p>
+        <p>{{ Person.last_name }}</p>
+        <p>{{ Person.second_last_name }}</p>
+        <p>{{ Person.age }}</p>
+        <p>{{ Person.identification_type_id }}</p>
+        <p>{{ Person.idetification }}</p>
+        <p>{{ Person.birthday }}</p>
+        <p>{{ Person.address }}</p>
+        <p>{{ Person.email }}</p>
+        <p>{{ Person.phone_number }}</p>
+        <p>{{ Person.entity_id }}</p>
+        <p>{{ Person.ocupation }}</p>
+
+
+		
+        <hr>
+		<a href="/Persons/edit/{{ Person.id }}" class="btn btn-dark float-left">Editar Persona</a>
+		
+		<form action="{{ '/Persons/'+ Person.id + '?_method=DELETE' }}" method="POST">
+	    	{{ csrfField() }}
+			<button type="submit" class="btn btn-danger float-right">Delete</button>
+		</form>
+	@endsection
