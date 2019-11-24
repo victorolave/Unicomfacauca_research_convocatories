@@ -3,62 +3,77 @@
 const Entity = use('App/Models/Entity')
 
 class EntityController {
-    async create({request, response}){
-        const{name,nit,legal_representative_id,sector,entity_type_id,rol_id,country,address,email,web,contact_person_id}=request.only([
-            'name',
-            'nit',
-            'legal_representative_id',
-            'sector',
-            'entity_type_id',
-            'rol_id',
-            'country',
-            'address',
-            'email',
-            'web',
-            'contact_person_id'
-        ])
 
-        await Entity.create({
-            name,
-            nit,
-            legal_representative_id,
-            sector,
-            entity_type_id,
-            rol_id,
-            country,
-            address,
-            email,
-            web,
-            contact_person_id
-        })
-        return response.send({message: 'Entidad creada con exito!'})
-    }
-    async update ({params, request, response}){
-		const Entidad = await Entity.find(params.id)
-		Entidad.name = request.input('name')
-		Entidad.nit = request.input('nit')
-		Entidad.legal_representative_id = request.input('legal_representative_id')
-		Entidad.sector = request.input('sector')
-		Entidad.entity_type_id = request.input('entity_type_id')
-		Entidad.rol_id = request.input('rol_id')
-		Entidad.country = request.input('country')
-		Entidad.address = request.input('address')
-		Entidad.email = request.input('email')
-        Entidad.web = request.input('web')
-        Entidad.contact_person_id = request.input('contact_person_id')
+    async index({ view }) {
 
-        await Entidad.save()
+		const Entity = await Entity.all()
 
-        return response.send({message:'Entidad editada con exito!'})
+		return view.render('Entity.index', {
+			Entitys: Entity.toJSON()
+		})
+	}
+
+	async add({ view }) {
+		return view.render('Entity.add')
+	}
+
+	async store({ request, response, view }) {
+		const Entity = new Entity()
+		Entity.name = request.input('name')
+        Entity.nit = request.input('nit')
+        Entity.legal_representative_id = request.input('legal_representative_id')
+		Entity.sector = request.input('sector')
+        Entity.entity_type_id = request.input('entity_type_id')
+        Entity.rol_id = request.input('rol_id')
+        Entity.country = request.input('country')
+        Entity.city = request.input('city')
+        Entity.address = request.input('address')
+        Entity.email = request.input('email')
+        Entity.web = request.input('web')
+        Entity.contact_person_id = request.input('contact_person_id')
+		await Entity.save()
+		return response.redirect('/Entities')
+	}
+    async details({ params, view }) {
+		console.log(params)
+		const Entity = await Entity.find(params.id)
+		return view.render('Entity.details', {
+			Entity
+		})
+	}
+	async edit({ params, view }) {
+		const Entity = await Entity.find(params.id)
+		return view.render('Entity.edit', {
+			Entity
+		})
+	}
+
+	async update ({params, request, response}){
+		const Entity = await Entity.find(params.id)
+		Entity.name = request.input('name')
+        Entity.nit = request.input('nit')
+        Entity.legal_representative_id = request.input('legal_representative_id')
+		Entity.sector = request.input('sector')
+        Entity.entity_type_id = request.input('entity_type_id')
+        Entity.rol_id = request.input('rol_id')
+        Entity.country = request.input('country')
+        Entity.city = request.input('city')
+        Entity.address = request.input('address')
+        Entity.email = request.input('email')
+        Entity.web = request.input('web')
+        Entity.contact_person_id = request.input('contact_person_id')
+
+        await Entity.save()
+
+        return response.redirect('/Entities')
 
 	}
 	async destroy({ params, response }) {
-		const Entidad = await Entity.find(params.id)
-		await Entidad.delete()
+		const Entity = await Entity.find(params.id)
+		await Entity.delete()
 
-		return response.send({message: 'Entidad eliminada con exito!'})
+		return response.redirect('/Entities')
 	}
 }
-
 
 module.exports = EntityController

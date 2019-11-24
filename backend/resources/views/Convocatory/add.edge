@@ -1,0 +1,30 @@
+@layout('main')
+@section('content')
+		<form action="/Convocatories" method="POST">
+			{{ csrfField() }}	
+
+			<div class="form-group">
+				<label for="">Nombre Convocatoria</label>
+				<input type="text" name="name" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="">Tipo Convocatoria</label>
+				<input type="text" name="type" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Año</label>
+				<input type="integer" name="year" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="">Inicio Convocatoria</label>
+				<input type="date" name="start_date" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="">Fin Convocatoria</label>
+				<input type="date" name="end_date" class="form-control">
+			</div>
+			<button type="submit" class="btn btn-dark primary">
+				Guardar
+			</button>
+		</form>
+	@endsection

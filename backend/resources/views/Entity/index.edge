@@ -1,0 +1,13 @@
+@layout('main')
+	@section('content')
+	<div id="index">
+		<ul class="list-group">
+			@each(Entity in Entitys)
+				<li class="list-group-item">
+					<a href="/Entities/{{Entity.id}}">{{Entity.name}}</a>
+				</li>
+			@endeach
+		</ul>
+
+	</div>
+	@endsection

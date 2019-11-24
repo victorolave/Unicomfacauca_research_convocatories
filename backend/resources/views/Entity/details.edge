@@ -1,0 +1,25 @@
+@layout('main')
+	@section('content')
+		<h1>{{ Entity.name }}</h1>	
+		<p>{{ Entity.nit }}</p>
+        <p>{{ Entity.legal_representative_id }}</p>
+        <p>{{ Entity.sector }}</p>
+        <p>{{ Entity.entity_type_id }}</p>
+        <p>{{ Entity.rol_id }}</p>
+        <p>{{ Entity.country }}</p>
+        <p>{{ Entity.city }}</p>
+        <p>{{ Entity.address }}</p>
+        <p>{{ Entity.email }}</p>
+        <p>{{ Entity.web }}</p>
+        <p>{{ Entity.contact_person_id }}</p>
+
+
+		
+        <hr>
+		<a href="/Entities/edit/{{ Entity.id }}" class="btn btn-dark float-left">Editar Entidad</a>
+		
+		<form action="{{ '/Entities/'+ Entity.id + '?_method=DELETE' }}" method="POST">
+	    	{{ csrfField() }}
+			<button type="submit" class="btn btn-danger float-right">Delete</button>
+		</form>
+	@endsection

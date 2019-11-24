@@ -1,0 +1,17 @@
+@layout('main')
+	@section('content')
+		<h1>{{ Convocatoria.name }}</h1>	
+		<p>{{ Convocatoria.type }}</p>
+        <p>{{ Convocatoria.year }}</p>
+        <p>{{ Convocatoria.start_date }}</p>
+        <p>{{ Convocatoria.end_date }}</p>
+
+		
+        <hr>
+		<a href="/Convocatories/edit/{{ Convocatoria.id }}" class="btn btn-dark float-left">Editar Convocatoria</a>
+		
+		<form action="{{ '/Convocatories/'+ Convocatoria.id + '?_method=DELETE' }}" method="POST">
+	    	{{ csrfField() }}
+			<button type="submit" class="btn btn-danger float-right">Delete</button>
+		</form>
+	@endsection

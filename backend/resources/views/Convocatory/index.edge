@@ -1,0 +1,13 @@
+@layout('main')
+	@section('content')
+	<div id="index">
+		<ul class="list-group">
+			@each(Convocatoria in Convocatorias)
+				<li class="list-group-item">
+					<a href="/Convocatories/{{Convocatoria.id}}">{{Convocatoria.name}}</a>
+				</li>
+			@endeach
+		</ul>
+
+	</div>
+	@endsection

@@ -4,47 +4,62 @@ const Convocatory = use('App/Models/Convocatory')
 
 class ConvocatoryController {
 
-    /**
-     * @desc  
-     */
-    async create({ request, response }) {
-        const { name, type, year, start_date, end_date } = request.only([
-            'name',
-            'type',
-            'year',
-            'start_date',
-            'end_date'
-        ])
+    async index({ view }) {
 
-        await Convocatory.create({
-            name,
-            type,
-            year,
-            start_date,
-            end_date
-        })
-        return response.send({ message: 'Convocatoria creada con exito!' })
-    }
-    async update({ params, request, response }) {
-        const Convocatoria = await Convocatory.find(params.id)
-        Convocatoria.name = request.input('name')
+		const Convocatoria = await Convocatory.all()
+
+		return view.render('Convocatory.index', {
+			Convocatorias: Convocatoria.toJSON()
+		})
+	}
+
+	async add({ view }) {
+		return view.render('Convocatory.add')
+	}
+
+	async store({ request, response, view }) {
+		const Convocatoria = new Convocatory()
+		Convocatoria.name = request.input('name')
         Convocatoria.type = request.input('type')
         Convocatoria.year = request.input('year')
-        Convocatoria.start_date = request.input('start_date')
-        Convocatoria.end_date = request.input('end_date')
+		Convocatoria.start_date = request.input('start_date')
+		Convocatoria.end_date = request.input('end_date')
+		await Convocatoria.save()
+		return response.redirect('/Convocatories')
+	}
+    async details({ params, view }) {
+		console.log(params)
+		const Convocatoria = await Convocatory.find(params.id)
+		return view.render('Convocatory.details', {
+			Convocatoria
+		})
+	}
+	async edit({ params, view }) {
+		const Convocatoria = await Convocatory.find(params.id)
+		return view.render('Convocatory.edit', {
+			Convocatoria
+		})
+	}
 
+	async update ({params, request, response}){
+		const Convocatoria = await Convocatory.find(params.id)
+		Convocatoria.name = request.input('name')
+		Convocatoria.type = request.input('type')
+		Convocatoria.year = request.input('year')
+		Convocatoria.start_date = request.input('start_date')
+		Convocatoria.end_date = request.input('end_date')
 
         await Convocatoria.save()
 
-        return response.send({ message: 'Convocatoria editada con exito!' })
+        return response.redirect('/Convocatories')
 
-    }
-    async destroy({ params, response }) {
-        const Convocatoria = await Convocatory.find(params.id)
-        await Convocatoria.delete()
+	}
+	async destroy({ params, response }) {
+		const Convocatoria = await Convocatory.find(params.id)
+		await Convocatoria.delete()
 
-        return response.send({ message: 'Convocatoria eliminada con exito!' })
-    }
+		return response.redirect('/Convocatories')
+	}
 }
 
 module.exports = ConvocatoryController

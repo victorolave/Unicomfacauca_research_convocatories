@@ -1,0 +1,60 @@
+@layout('main')
+
+    @section('content')
+    <h1>Editar Entidad </h1>
+		<form action="{{ '/Entities/'+ Entity.id + '?_method=PUT' }} " method="POST">
+			{{ csrfField() }}	
+			
+            <div class="form-group">
+				<label for="">Nombre Entidad</label>
+				<input type="text" name="name" class="form-control" value="{{ Entity.name }}">
+			</div>
+            <div class="form-group">
+				<label for="">Nit</label>
+				<input type="text" name="nit" class="form-control" value="{{ Entity.nit }}">
+			</div>
+            <div class="form-group">
+				<label for="">Id Representante legal</label>
+				<input type="text" name="legal_representative_id" class="form-control" value="{{ Entity.legal_representative_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Sector</label>
+				<input type="text" name="sector" class="form-control" value="{{ Entity.sector }}">
+            </div>
+            <div class="form-group">
+				<label for="">Id tipo identidad</label>
+				<input type="text" name="entity_type_id" class="form-control" value="{{ Entity.entity_type_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Id Rol</label>
+				<input type="text" name="rol_id" class="form-control" value="{{ Entity.rol_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Pais</label>
+				<input type="text" name="country" class="form-control" value="{{ Entity.country }}">
+            </div>
+            <div class="form-group">
+				<label for="">Ciudad</label>
+				<input type="text" name="city" class="form-control" value="{{ Entity.city }}">
+            </div>
+            <div class="form-group">
+				<label for="">Direccion</label>
+				<input type="text" name="address" class="form-control" value="{{ Entity.address }}">
+            </div>
+            <div class="form-group">
+				<label for="">Email</label>
+				<input type="text" name="email" class="form-control" value="{{ Entity.email }}">
+            </div>
+            <div class="form-group">
+				<label for="">Web</label>
+				<input type="text" name="web" class="form-control" value="{{ Entity.web }}">
+            </div>
+            <div class="form-group">
+				<label for="">Id contacto</label>
+				<input type="text" name="contact_person_id" class="form-control" value="{{ Entity.contact_person_id }}">
+			</div>
+			<button type="submit" class="btn btn-primary">
+				Actualizar
+			</button>
+		</form>
+	@endsection

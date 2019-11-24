@@ -1,0 +1,58 @@
+@layout('main')
+@section('content')
+		<form action="/Entities" method="POST">
+			{{ csrfField() }}	
+
+			<div class="form-group">
+				<label for="">Nombre Entidad</label>
+				<input type="text" name="name" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Nit</label>
+				<input type="text" name="nit" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Id Representante legal</label>
+				<input type="text" name="legal_representative_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Sector</label>
+				<input type="text" name="sector" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Id tipo identidad</label>
+				<input type="text" name="entity_type_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Id Rol</label>
+				<input type="text" name="rol_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Pais</label>
+				<input type="text" name="country" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Ciudad</label>
+				<input type="text" name="city" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Direccion</label>
+				<input type="text" name="address" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Email</label>
+				<input type="text" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Web</label>
+				<input type="text" name="web" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Id contacto</label>
+				<input type="text" name="contact_person_id" class="form-control">
+			</div>
+			<button type="submit" class="btn btn-dark primary">
+				Guardar
+			</button>
+		</form>
+	@endsection
