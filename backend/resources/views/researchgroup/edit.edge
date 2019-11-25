@@ -1,0 +1,44 @@
+@layout('main')
+
+    @section('content')
+    <h1>Editar Grupo de Investigacion </h1>
+		<form action="{{ '/ResearchGroups/'+ ResearchGroup.id + '?_method=PUT' }} " method="POST">
+			{{ csrfField() }}	
+			
+            <div class="form-group">
+				<label for="">Nombre</label>
+				<input type="text" name="name" class="form-control" value="{{ ResearchGroup.name }}">
+			</div>
+            <div class="form-group">
+				<label for="">Linea Id</label>
+				<input type="integer" name="linea_id" class="form-control" value="{{ ResearchGroup.linea_id }}">
+			</div>
+            <div class="form-group">
+				<label for="">Clasificacion Colciencias</label>
+				<input type="text" name="colciencias_classification" class="form-control" value="{{ ResearchGroup.colciencias_classification }}">
+            </div>
+            <div class="form-group">
+				<label for="">Estado Colciencias</label>
+				<input type="text" name="cocliencias_status" class="form-control" value="{{ ResearchGroup.cocliencias_status }}">
+            </div>
+            <div class="form-group">
+				<label for="">Id Director</label>
+				<input type="integer" name="director_id" class="form-control" value="{{ ResearchGroup.director_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Semillero de Investigacion </label>
+				<input type="integer" name="research_seedbed_id" class="form-control" value="{{ ResearchGroup.research_seedbed_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Id Entidad</label>
+				<input type="integer" name="entity_id" class="form-control" value="{{ ResearchGroup.entity_id }}">
+            </div>
+            <div class="form-group">
+				<label for="">Contacto Persona</label>
+				<input type="integer" name="contact_person_id" class="form-control" value="{{ ResearchGroup.contact_person_id }}">
+            </div>
+			<button type="submit" class="btn btn-primary">
+				Actualizar
+			</button>
+		</form>
+	@endsection

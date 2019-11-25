@@ -1,0 +1,43 @@
+@layout('main')
+@section('content')
+		<form action="/ResearchGroups" method="POST">
+			{{ csrfField() }}	
+
+			<div class="form-group">
+				<label for="">Nombre</label>
+				<input type="text" name="name" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Linea Id</label>
+				<input type="integer" name="linea_id" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Clasificacion Colciencias</label>
+				<input type="text" name="colciencias_classification" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Estado Colciencias</label>
+				<input type="text" name="cocliencias_status" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Id Director</label>
+				<input type="integer" name="director_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Semillero de Investigacion </label>
+				<input type="integer" name="research_seedbed_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Id Entidad</label>
+				<input type="integer" name="entity_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Contacto Persona</label>
+				<input type="integer" name="contact_person_id" class="form-control">
+            </div>
+            
+			<button type="submit" class="btn btn-dark primary">
+				Guardar
+			</button>
+		</form>
+	@endsection

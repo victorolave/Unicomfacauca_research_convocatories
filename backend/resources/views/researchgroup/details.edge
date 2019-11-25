@@ -1,0 +1,21 @@
+@layout('main')
+	@section('content')
+		<h1>{{ ResearchGroup.name }}</h1>	
+		<p>{{ ResearchGroup.linea_id }}</p>
+        <p>{{ ResearchGroup.colciencias_classification }}</p>
+        <p>{{ ResearchGroup.cocliencias_status }}</p>
+        <p>{{ ResearchGroup.director_id }}</p>
+        <p>{{ ResearchGroup.research_seedbed_id }}</p>
+        <p>{{ ResearchGroup.entity_id }}</p>
+        <p>{{ ResearchGroup.contact_person_id }}</p>
+
+
+		
+        <hr>
+		<a href="/ResearchGroups/edit/{{ ResearchGroup.id }}" class="btn btn-dark float-left">Editar Grupo de Investigacion</a>
+		
+		<form action="{{ '/ResearchGroups/'+ ResearchGroup.id + '?_method=DELETE' }}" method="POST">
+	    	{{ csrfField() }}
+			<button type="submit" class="btn btn-danger float-right">Delete</button>
+		</form>
+	@endsection

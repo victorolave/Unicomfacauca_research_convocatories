@@ -1,0 +1,13 @@
+@layout('main')
+	@section('content')
+	<div id="index">
+		<ul class="list-group">
+			@each(ResearchSeeder in ResearchSeeders)
+				<li class="list-group-item">
+					<a href="/ResearchSeeders/{{ResearchSeeder.id}}">{{ResearchSeeder.name}}</a>
+				</li>
+			@endeach
+		</ul>
+
+	</div>
+	@endsection

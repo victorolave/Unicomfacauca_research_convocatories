@@ -1,0 +1,17 @@
+@layout('main')
+	@section('content')
+		<h1>{{ ResearchSeeder.name }}</h1>	
+		<p>{{ ResearchSeeder.group_id }}</p>
+        <p>{{ ResearchSeeder.program_id }}</p>
+        
+
+
+		
+        <hr>
+		<a href="/ResearchSeeders/edit/{{ ResearchSeeder.id }}" class="btn btn-dark float-left">Editar Semillero</a>
+		
+		<form action="{{ '/ResearchSeeders/'+ ResearchSeeder.id + '?_method=DELETE' }}" method="POST">
+	    	{{ csrfField() }}
+			<button type="submit" class="btn btn-danger float-right">Delete</button>
+		</form>
+	@endsection

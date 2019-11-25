@@ -1,0 +1,19 @@
+@layout('main')
+	@section('content')
+		<h1>{{ Researcher.person_id }}</h1>	
+		<p>{{ Researcher.type_id }}</p>
+        <p>{{ Researcher.rol_id }}</p>
+        <p>{{ Researcher.research_group_seeder_id }}</p>
+        <p>{{ Researcher.weeks }}</p>
+        <p>{{ Researcher.hours_per_week }}</p>
+
+
+		
+        <hr>
+		<a href="/Researchers/edit/{{ Researcher.id }}" class="btn btn-dark float-left">Editar Investigador</a>
+		
+		<form action="{{ '/Researchers/'+ Researcher.id + '?_method=DELETE' }}" method="POST">
+	    	{{ csrfField() }}
+			<button type="submit" class="btn btn-danger float-right">Delete</button>
+		</form>
+	@endsection

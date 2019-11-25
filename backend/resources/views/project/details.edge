@@ -1,0 +1,27 @@
+@layout('main')
+	@section('content')
+		<h1>{{ Project.title }}</h1>	
+		<p>{{ Project.area_id }}</p>
+        <p>{{ Project.line_id }}</p>
+        <p>{{ Project.campus }}</p>
+        <p>{{ Project.action_place }}</p>
+        <p>{{ Project.duration }}</p>
+        <p>{{ Project.unicomfacauca_net_cash }}</p>
+        <p>{{ Project.unicomfacauca_species }}</p>
+        <p>{{ Project.entity_id }}</p>
+        <p>{{ Project.entity_net_cash }}</p>
+        <p>{{ Project.entity_species }}</p>
+        <p>{{ Project.project_type_id }}</p>
+		<p>{{ Project.keywords }}</p>
+		<p>{{ Project.convocatories_id }}</p>
+
+
+		
+        <hr>
+		<a href="/Projects/edit/{{ Project.id }}" class="btn btn-dark float-left">Editar Proyecto</a>
+		
+		<form action="{{ '/Projects/'+ Project.id + '?_method=DELETE' }}" method="POST">
+	    	{{ csrfField() }}
+			<button type="submit" class="btn btn-danger float-right">Delete</button>
+		</form>
+	@endsection

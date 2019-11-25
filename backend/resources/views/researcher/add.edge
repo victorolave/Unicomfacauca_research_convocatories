@@ -1,0 +1,34 @@
+@layout('main')
+@section('content')
+		<form action="/Researchers" method="POST">
+			{{ csrfField() }}	
+
+			<div class="form-group">
+				<label for="">Id persona</label>
+				<input type="integer" name="person_id" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Tipo</label>
+				<input type="integer" name="type_id" class="form-control">
+			</div>
+            <div class="form-group">
+				<label for="">Rol id</label>
+				<input type="integer" name="rol_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Grupo de Investigacion</label>
+				<input type="text" name="research_group_seeder_id" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Semanas</label>
+				<input type="integer" name="weeks" class="form-control">
+            </div>
+            <div class="form-group">
+				<label for="">Horas por semana</label>
+				<input type="integer" name="hours_per_week" class="form-control">
+            </div>
+			<button type="submit" class="btn btn-dark primary">
+				Guardar
+			</button>
+		</form>
+	@endsection
