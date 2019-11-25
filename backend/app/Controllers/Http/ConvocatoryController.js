@@ -4,20 +4,22 @@ const Convocatory = use('App/Models/Convocatory')
 
 class ConvocatoryController {
 
-    async index({ view }) {
+    async index() {
 
 		const Convocatoria = await Convocatory.all()
 
-		return view.render('Convocatory.index', {
-			Convocatorias: Convocatoria.toJSON()
-		})
+		return Convocatoria.toJSON();
+		
 	}
-
+/**
+ * @deprecated
+ * @param {*} param0 
+ */
 	async add({ view }) {
 		return view.render('Convocatory.add')
 	}
 
-	async store({ request, response, view }) {
+	async store({ request }) {
 		const Convocatoria = new Convocatory()
 		Convocatoria.name = request.input('name')
         Convocatoria.type = request.input('type')
@@ -25,23 +27,25 @@ class ConvocatoryController {
 		Convocatoria.start_date = request.input('start_date')
 		Convocatoria.end_date = request.input('end_date')
 		await Convocatoria.save()
-		return response.redirect('/Convocatories')
+		return Convocatoria.toJSON();
 	}
-    async details({ params, view }) {
+    async details({ params }) {
 		console.log(params)
 		const Convocatoria = await Convocatory.find(params.id)
-		return view.render('Convocatory.details', {
-			Convocatoria
-		})
+
+		return Convocatoria.toJSON();
 	}
-	async edit({ params, view }) {
+	/**
+	 * @deprecated
+	 * @param {} param0 
+	 */
+	async edit({ params }) {
 		const Convocatoria = await Convocatory.find(params.id)
-		return view.render('Convocatory.edit', {
-			Convocatoria
-		})
+		return Convocatoria
+		
 	}
 
-	async update ({params, request, response}){
+	async update ({params, request}){
 		const Convocatoria = await Convocatory.find(params.id)
 		Convocatoria.name = request.input('name')
 		Convocatoria.type = request.input('type')
@@ -51,14 +55,14 @@ class ConvocatoryController {
 
         await Convocatoria.save()
 
-        return response.redirect('/Convocatories')
+        return Convocatoria.toJSON();
 
 	}
-	async destroy({ params, response }) {
+	async destroy({ params }) {
 		const Convocatoria = await Convocatory.find(params.id)
 		await Convocatoria.delete()
 
-		return response.redirect('/Convocatories')
+		return Convocatoria.toJSON();
 	}
 }
 

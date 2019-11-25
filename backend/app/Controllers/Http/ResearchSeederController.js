@@ -4,34 +4,39 @@ const ResearchSeeders = use('App/Models/ResearchSeeder')
 
 class ResearchSeederController {
 
-    async index({ view }) {
+    async index() {
 
 		const ResearchSeeder = await ResearchSeeders.all()
 
-		return view.render('ResearchSeeder.index', {
-			ResearchSeeders: ResearchSeeder.toJSON()
-		})
+		return ResearchSeeder.toJSON()
+		
 	}
-
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
 	async add({ view }) {
 		return view.render('ResearchSeeder.add')
 	}
 
-	async store({ request, response, view }) {
+	async store({ request }) {
 		const ResearchSeeder = new ResearchSeeders()
 		ResearchSeeder.name = request.input('name')
         ResearchSeeder.group_id = request.input('group_id')
         ResearchSeeder.program_id = request.input('program_id')
 		await ResearchSeeder.save()
-		return response.redirect('/ResearchSeeders')
+		return ResearchSeeder.toJSON();
 	}
-    async details({ params, view }) {
+    async details({ params }) {
 		console.log(params)
 		const ResearchSeeder = await ResearchSeeders.find(params.id)
-		return view.render('ResearchSeeder.details', {
-			ResearchSeeder
-		})
+		return ResearchSeeder.toJSON();
+		
 	}
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
 	async edit({ params, view }) {
 		const ResearchSeeder = await ResearchSeeders.find(params.id)
 		return view.render('ResearchSeeder.edit', {
@@ -39,21 +44,21 @@ class ResearchSeederController {
 		})
 	}
 
-	async update ({params, request, response}){
+	async update ({params, request}){
 		const ResearchSeeder = await ResearchSeeders.find(params.id)
 		
         await ResearchSeeder.save()
 		ResearchSeeder.name = request.input('name')
         ResearchSeeder.group_id = request.input('group_id')
         ResearchSeeder.program_id = request.input('program_id')
-        return response.redirect('/ResearchSeeders')
+        return ResearchSeeder.toJSON();
 
 	}
-	async destroy({ params, response }) {
+	async destroy({ params }) {
 		const ResearchSeeder = await ResearchSeeders.find(params.id)
 		await ResearchSeeder.delete()
 
-		return response.redirect('/ResearchSeeders')
+		return ResearchSeeder.toJSON();
 	}
 }
 

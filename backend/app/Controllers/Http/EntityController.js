@@ -4,20 +4,24 @@ const Entityy = use('App/Models/Entity')
 
 class EntityController {
 
-    async index({ view }) {
+    async index() {
 
 		const Entity = await Entityy.all()
 
-		return view.render('Entity.index', {
-			Entitys: Entity.toJSON()
-		})
+		return Entity.toJSON()
+		
 	}
+
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
 
 	async add({ view }) {
 		return view.render('Entity.add')
 	}
 
-	async store({ request, response, view }) {
+	async store({ request }) {
 		const Entity = new Entityy()
 		Entity.name = request.input('name')
         Entity.nit = request.input('nit')
@@ -32,15 +36,19 @@ class EntityController {
         Entity.web = request.input('web')
         Entity.contact_person_id = request.input('contact_person_id')
 		await Entity.save()
-		return response.redirect('/Entities')
+		return Entity.toJSON()
 	}
     async details({ params, view }) {
 		console.log(params)
 		const Entity = await Entityy.find(params.id)
-		return view.render('Entity.details', {
-			Entity
-		})
+		return Entity.toJSON();
+		
 	}
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
+	
 	async edit({ params, view }) {
 		const Entity = await Entityy.find(params.id)
 		return view.render('Entity.edit', {
@@ -65,14 +73,14 @@ class EntityController {
 
         await Entity.save()
 
-        return response.redirect('/Entities')
+        return Entity.toJSON()
 
 	}
 	async destroy({ params, response }) {
 		const Entity = await Entityy.find(params.id)
 		await Entity.delete()
 
-		return response.redirect('/Entities')
+		return Entity.toJSON()
 	}
 }
 

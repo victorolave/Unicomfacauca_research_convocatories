@@ -4,20 +4,23 @@ const Persons = use('App/Models/Person')
 
 class PersonController {
 
-    async index({ view }) {
+    async index() {
 
 		const Person = await Persons.all()
 
-		return view.render('Person.index', {
-			Persons: Person.toJSON()
-		})
+		return Person.toJSON()
+		
 	}
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
 
 	async add({ view }) {
 		return view.render('Person.add')
 	}
 
-	async store({ request, response, view }) {
+	async store({ request }) {
 		const Person = new Persons()
 		Person.first_name = request.input('first_name')
         Person.second_name = request.input('second_name')
@@ -33,15 +36,19 @@ class PersonController {
         Person.entity_id = request.input('entity_id')
         Person.ocupation = request.input('ocupation')
 		await Person.save()
-		return response.redirect('/Persons')
+		return Person.toJSON();
 	}
-    async details({ params, view }) {
+    async details({ params }) {
 		console.log(params)
 		const Person = await Persons.find(params.id)
-		return view.render('Person.details', {
-			Person
-		})
+		return Person.toJSON
+		
 	}
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
+
 	async edit({ params, view }) {
 		const Person = await Persons.find(params.id)
 		return view.render('Person.edit', {
@@ -49,7 +56,7 @@ class PersonController {
 		})
 	}
 
-	async update ({params, request, response}){
+	async update ({params, request}){
 		const Person = await Persons.find(params.id)
 		Person.first_name = request.input('first_name')
         Person.second_name = request.input('second_name')
@@ -66,14 +73,14 @@ class PersonController {
         Person.ocupation = request.input('ocupation')
         await Person.save()
 
-        return response.redirect('/Persons')
+        return Person.toJSON();
 
 	}
-	async destroy({ params, response }) {
+	async destroy({ params }) {
 		const Person = await Persons.find(params.id)
 		await Person.delete()
 
-		return response.redirect('/Persons')
+		return Person.toJSON();
 	}
 }
 

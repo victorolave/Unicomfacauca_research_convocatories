@@ -3,20 +3,22 @@
 const ResearchGroups = use('App/Models/ResearchGroup')
 
 class ResearchGroupController {
-    async index({ view }) {
+    async index() {
 
 		const ResearchGroup = await ResearchGroups.all()
 
-		return view.render('ResearchGroup.index', {
-			ResearchGroups: ResearchGroup.toJSON()
-		})
+		return ResearchGroup.toJSON()
+		
 	}
-
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
 	async add({ view }) {
 		return view.render('ResearchGroup.add')
 	}
 
-	async store({ request, response, view }) {
+	async store({ request }) {
 		const ResearchGroup = new ResearchGroups()
 		ResearchGroup.name = request.input('name')
         ResearchGroup.linea_id = request.input('linea_id')
@@ -27,23 +29,25 @@ class ResearchGroupController {
         ResearchGroup.entity_id = request.input('entity_id')
         ResearchGroup.contact_person_id = request.input('contact_person_id')
         await ResearchGroup.save()
-		return response.redirect('/ResearchGroups')
+		return ResearchGroup.toJSON();
 	}
-    async details({ params, view }) {
+    async details({ params }) {
 		console.log(params)
 		const ResearchGroup = await ResearchGroups.find(params.id)
-		return view.render('ResearchGroup.details', {
-			ResearchGroup
-		})
+		return ResearchGroup.toJSON();
+		
 	}
-	async edit({ params, view }) {
+	/**
+	 * @deprecated
+	 * @param {*} param0 
+	 */
+	async edit({ params }) {
 		const ResearchGroup = await ResearchGroups.find(params.id)
-		return view.render('ResearchGroup.edit', {
-			ResearchGroup
-		})
+		return ResearchGroup
+		
 	}
 
-	async update ({params, request, response}){
+	async update ({params, request}){
 		const ResearchGroup = await ResearchGroups.find(params.id)
 		ResearchGroup.name = request.input('name')
         ResearchGroup.linea_id = request.input('linea_id')
@@ -55,14 +59,14 @@ class ResearchGroupController {
         ResearchGroup.contact_person_id = request.input('contact_person_id')
         await ResearchGroup.save()
 
-        return response.redirect('/ResearchGroups')
+        return ResearchGroup.toJSON();
 
 	}
-	async destroy({ params, response }) {
+	async destroy({ params }) {
 		const ResearchGroup = await ResearchGroups.find(params.id)
 		await ResearchGroup.delete()
 
-		return response.redirect('/ResearchGroups')
+		return ResearchGroup.toJSON();
 	}
 }
 
