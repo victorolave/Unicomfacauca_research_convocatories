@@ -3,22 +3,20 @@
 const Researchers = use('App/Models/Research')
 
 class ResearcherController {
-    async index() {
+    async index({ view }) {
 
 		const Researcher = await Researchers.all()
 
-		return Researcher.toJSON()
-	
+		return view.render('Researcher.index', {
+			Researchers: Researcher.toJSON()
+		})
 	}
-	/**
-	 * @deprecated
-	 * @param {*} param0 
-	 */
+
 	async add({ view }) {
 		return view.render('Researcher.add')
 	}
 
-	async store({ request }) {
+	async store({ request, response, view }) {
 		const Researcher = new Researchers()
 		Researcher.person_id = request.input('person_id')
         Researcher.type_id = request.input('type_id')
@@ -28,18 +26,15 @@ class ResearcherController {
         Researcher.weeks = request.input('weeks')
         Researcher.hours_per_week = request.input('hours_per_week')
 		await Researcher.save()
-		return Researcher.toJSON();
+		return response.redirect('/Researchers')
 	}
-    async details({ params }) {
+    async details({ params, view }) {
 		console.log(params)
 		const Researcher = await Researchers.find(params.id)
-		return Researcher.toJSON();
-		
+		return view.render('Researcher.details', {
+			Researcher
+		})
 	}
-	/**
-	 * @deprecated
-	 * @param {*} param0 
-	 */
 	async edit({ params, view }) {
 		const Researcher = await Researchers.find(params.id)
 		return view.render('Researcher.edit', {
@@ -47,7 +42,7 @@ class ResearcherController {
 		})
 	}
 
-	async update ({params, request}){
+	async update ({params, request, response}){
 		const Researcher = await Researchers.find(params.id)
         Researcher.person_id = request.input('person_id')
         Researcher.type_id = request.input('type_id')
@@ -58,14 +53,14 @@ class ResearcherController {
         Researcher.hours_per_week = request.input('hours_per_week')
         await Researcher.save()
 
-        return Researcher.toJSON();
+        return response.redirect('/Researchers')
 
 	}
-	async destroy({ params }) {
+	async destroy({ params, response }) {
 		const Researcher = await Researchers.find(params.id)
 		await Researcher.delete()
 
-		return Researcher.toJSON();
+		return response.redirect('/Researchers')
 	}
 }
 

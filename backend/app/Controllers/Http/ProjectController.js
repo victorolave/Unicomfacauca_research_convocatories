@@ -4,23 +4,21 @@ const Projects = use('App/Models/Project')
 
 
 class ProjectController {
-    
-    async index() {
+
+    async index({ view }) {
 
 		const Project = await Projects.all()
 
-		return Project.toJSON()
-		
+		return view.render('Person.index', {
+			Projects: Project.toJSON()
+		})
 	}
-/**
- * @deprecated
- * @param {*} param0 
- */
+
 	async add({ view }) {
 		return view.render('Project.add')
 	}
 
-	async store({ request }) {
+	async store({ request, response, view }) {
 		const Project = new Projects()
 		Project.title = request.input('title')
         Project.area_id = request.input('area_id')
@@ -37,18 +35,15 @@ class ProjectController {
         Project.keywords = request.input('keywords')
         Project.convocatories_id = request.input('convocatories_id')
 		await Project.save()
-		return Project.toJSON();
+		return response.redirect('/Projects')
 	}
-    async details({ params }) {
+    async details({ params, view }) {
 		console.log(params)
 		const Project = await Projects.find(params.id)
-		return Project.toJSON();
-	
+		return view.render('Project.details', {
+			Project
+		})
 	}
-	/**
-	 * @deprecated
-	 * @param {*} param0 
-	 */
 	async edit({ params, view }) {
 		const Project = await Projects.find(params.id)
 		return view.render('Project.edit', {
@@ -74,14 +69,14 @@ class ProjectController {
         Project.convocatories_id = request.input('convocatories_id')
         await Project.save()
 
-        return Project.toJSON();
+        return response.redirect('/Projects')
 
 	}
-	async destroy({ params }) {
+	async destroy({ params, response }) {
 		const Project = await Projects.find(params.id)
 		await Project.delete()
 
-		return Project.toJSON();
+		return response.redirect('/Projects')
 	}
 }
 
